@@ -19,6 +19,7 @@
       background-color: #0a0a0a;
       color: #e0e0e0;
       line-height: 1.6;
+      overflow-x: hidden;
     }
     .navbar {
       position: fixed;
@@ -32,19 +33,22 @@
       flex-direction: column;
       align-items: center;
       z-index: 1000;
+      transition: transform 0.3s ease;
     }
     .navbar .logo {
       margin-bottom: 40px;
       text-align: center;
+      position: relative;
     }
     .navbar .logo h1 {
       font-size: 1.8rem;
       color: #00f7ff;
       font-weight: 700;
+      animation: neonGlow 1.5s ease-in-out infinite alternate;
     }
-    .navbar nav {
-      flex-grow: 1;
-      width: 100%;
+    @keyframes neonGlow {
+      from { text-shadow: 0 0 5px #00f7ff, 0 0 10px #00f7ff; }
+      to { text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff; }
     }
     .navbar nav a {
       display: block;
@@ -55,10 +59,26 @@
       transition: all 0.3s ease;
       border-radius: 8px;
       margin: 5px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .navbar nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 247, 255, 0.2), transparent);
+      transition: left 0.4s ease;
+    }
+    .navbar nav a:hover::before {
+      left: 100%;
     }
     .navbar nav a:hover {
       background: #252525;
       color: #00f7ff;
+      transform: translateX(5px);
     }
     .navbar .social-links {
       display: flex;
@@ -68,10 +88,12 @@
     .navbar .social-links a {
       color: #a0a0a0;
       font-size: 1.5rem;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
+      position: relative;
     }
     .navbar .social-links a:hover {
       color: #00f7ff;
+      transform: scale(1.2);
     }
     .content {
       margin-left: 240px;
@@ -84,14 +106,23 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      background: linear-gradient(135deg, #0a0a0a, #151515);
       position: relative;
+      overflow: hidden;
+    }
+    #three-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
     .hero h1 {
       font-size: 4rem;
       font-weight: 700;
       color: #fff;
       margin-bottom: 10px;
+      animation: slideIn 1s ease-out;
     }
     .hero h1 span {
       color: #00f7ff;
@@ -100,6 +131,7 @@
       font-size: 2rem;
       color: #a0a0a0;
       margin-bottom: 20px;
+      animation: fadeInUp 1.2s ease-out;
     }
     .hero .typed-text span {
       color: #00f7ff;
@@ -113,11 +145,35 @@
       font-size: 1.1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.4s ease;
+    }
+    .hero button:hover::before {
+      left: 100%;
     }
     .hero button:hover {
       background: #00d4db;
-      transform: translateY(-3px);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+    }
+    @keyframes slideIn {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
     section {
       padding: 80px 0;
@@ -131,6 +187,7 @@
       margin-bottom: 40px;
       text-align: center;
       position: relative;
+      animation: fadeIn 1s ease-out;
     }
     section h2::after {
       content: '';
@@ -141,6 +198,12 @@
       bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { width: 60px; }
+      50% { width: 100px; }
+      100% { width: 60px; }
     }
     .card-grid {
       display: grid;
@@ -152,12 +215,32 @@
       background: #252525;
       padding: 30px;
       border-radius: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 247, 255, 0.1) 0%, transparent 70%);
+      transition: transform 0.5s ease;
+      z-index: 0;
+    }
+    .card:hover::before {
+      transform: rotate(45deg);
     }
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+      box-shadow: 0 8px 20px rgba(0, 247, 255, 0.3);
+    }
+    .card h3, .card p, .card ul {
+      position: relative;
+      z-index: 1;
     }
     .card h3 {
       font-size: 1.4rem;
@@ -176,6 +259,10 @@
       margin-bottom: 8px;
       position: relative;
       padding-left: 20px;
+      transition: transform 0.3s ease;
+    }
+    .card ul li:hover {
+      transform: translateX(5px);
     }
     .card ul li::before {
       content: '•';
@@ -191,18 +278,14 @@
       text-align: center;
       border-top: 1px solid #00f7ff;
     }
-    footer .footer-social {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
     footer .footer-social a {
       color: #a0a0a0;
       font-size: 1.5rem;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
     }
     footer .footer-social a:hover {
       color: #00f7ff;
+      transform: scale(1.2);
     }
     .modal {
       display: none;
@@ -224,6 +307,7 @@
       max-width: 500px;
       position: relative;
       animation: fadeIn 0.3s ease;
+      box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
@@ -244,6 +328,12 @@
       color: #e0e0e0;
       border-radius: 8px;
       font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    .modal-content input:focus,
+    .modal-content textarea:focus {
+      border-color: #00f7ff;
+      outline: none;
     }
     .modal-content textarea {
       resize: none;
@@ -259,10 +349,11 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
     }
     .modal-content button:hover {
       background: #00d4db;
+      box-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
     }
     .modal-content .close {
       position: absolute;
@@ -271,9 +362,40 @@
       color: #a0a0a0;
       font-size: 1.5rem;
       cursor: pointer;
+      transition: color 0.3s ease;
     }
     .modal-content .close:hover {
       color: #00f7ff;
+    }
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0a0a0a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+      transition: opacity 0.5s ease;
+    }
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loader::before {
+      content: '';
+      width: 50px;
+      height: 50px;
+      border: 5px solid #00f7ff;
+      border-top: 5px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     @media (max-width: 768px) {
       .navbar {
@@ -295,10 +417,14 @@
       section {
         padding: 40px 0;
       }
+      .card:hover {
+        transform: translateY(-5px);
+      }
     }
   </style>
 </head>
 <body>
+  <div class="loader"></div>
   <div class="navbar">
     <div class="logo">
       <h1>Satya</h1>
@@ -310,7 +436,7 @@
       <a href="#projects">Projects</a>
       <a href="#internships">Internships</a>
       <a href="#certifications">Certifications</a>
-      <a href="Satya_Resume.pdf" download>Resume</a>
+      <a href="Satya_Resume.pdf" target="_blank">Resume</a>
     </nav>
     <div class="social-links">
       <a href="https://github.com/SatyaPujith" title="GitHub"><i class="fab fa-github"></i></a>
@@ -320,6 +446,7 @@
 
   <div class="content">
     <section class="hero" id="home">
+      <canvas id="three-canvas"></canvas>
       <h1>Hi, I'm <span>Satya Pujith</span></h1>
       <div class="typed-text">I’m a <span id="typed">Web Developer</span></div>
       <button onclick="openModal()">Contact Me</button>
@@ -456,6 +583,7 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script>
     // Modal functionality
     function openModal() {
@@ -493,8 +621,67 @@
       setTimeout(type, isDeleting ? 50 : 100);
     }
 
+    // Three.js 3D Particle Background
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 50;
+
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particleCount = 1000;
+    const posArray = new Float32Array(particleCount * 3);
+    const velocities = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+      posArray[i] = (Math.random() - 0.5) * 100;
+      posArray[i + 1] = (Math.random() - 0.5) * 100;
+      posArray[i + 2] = (Math.random() - 0.5) * 100;
+      velocities[i] = (Math.random() - 0.5) * 0.05;
+      velocities[i + 1] = (Math.random() - 0.5) * 0.05;
+      velocities[i + 2] = (Math.random() - 0.5) * 0.05;
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    const material = new THREE.PointsMaterial({
+      color: 0x00f7ff,
+      size: 0.2,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending
+    });
+    const particles = new THREE.Points(particlesGeometry, material);
+    scene.add(particles);
+
+    function animateParticles() {
+      const positions = particlesGeometry.attributes.position.array;
+      for (let i = 0; i < particleCount * 3; i += 3) {
+        positions[i] += velocities[i];
+        positions[i + 1] += velocities[i + 1];
+        positions[i + 2] += velocities[i + 2];
+        if (Math.abs(positions[i]) > 50) velocities[i] *= -1;
+        if (Math.abs(positions[i + 1]) > 50) velocities[i + 1] *= -1;
+        if (Math.abs(positions[i + 2]) > 50) velocities[i + 2] *= -1;
+      }
+      particlesGeometry.attributes.position.needsUpdate = true;
+      particles.rotation.y += 0.001;
+      renderer.render(scene, camera);
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Loader animation
     document.addEventListener('DOMContentLoaded', () => {
       type();
+      animateParticles();
+      setTimeout(() => {
+        document.querySelector('.loader').classList.add('hidden');
+      }, 2000);
     });
   </script>
 </body>
