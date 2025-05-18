@@ -2,687 +2,300 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="google-site-verification" content="orLPpuncQuzWTqCtbdFojSv2dABlV7pVN6nzDfKeR58" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Botuku Satya Pujith - Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2Lw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    body {
       scroll-behavior: smooth;
     }
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0a0a0a;
-      color: #e0e0e0;
-      line-height: 1.6;
-      overflow-x: hidden;
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 240px;
-      height: 100%;
-      background: #151515;
-      padding: 40px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 1000;
-      transition: transform 0.3s ease;
-    }
-    .navbar .logo {
-      margin-bottom: 40px;
-      text-align: center;
-      position: relative;
-    }
-    .navbar .logo h1 {
-      font-size: 1.8rem;
-      color: #00f7ff;
-      font-weight: 700;
-      animation: neonGlow 1.5s ease-in-out infinite alternate;
-    }
-    @keyframes neonGlow {
-      from { text-shadow: 0 0 5px #00f7ff, 0 0 10px #00f7ff; }
-      to { text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff; }
-    }
-    .navbar nav a {
-      display: block;
-      padding: 12px 20px;
-      color: #a0a0a0;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      border-radius: 8px;
-      margin: 5px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .navbar nav a::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 247, 255, 0.2), transparent);
-      transition: left 0.4s ease;
-    }
-    .navbar nav a:hover::before {
-      left: 100%;
-    }
-    .navbar nav a:hover {
-      background: #252525;
-      color: #00f7ff;
-      transform: translateX(5px);
-    }
-    .navbar .social-links {
-      display: flex;
-      gap: 20px;
-      margin-top: 20px;
-    }
-    .navbar .social-links a {
-      color: #a0a0a0;
-      font-size: 1.5rem;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-    .navbar .social-links a:hover {
-      color: #00f7ff;
-      transform: scale(1.2);
-    }
-    .content {
-      margin-left: 240px;
-      padding: 0 40px;
-    }
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    #three-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-    .hero h1 {
-      font-size: 4rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 10px;
-      animation: slideIn 1s ease-out;
-    }
-    .hero h1 span {
-      color: #00f7ff;
-    }
-    .hero .typed-text {
-      font-size: 2rem;
-      color: #a0a0a0;
-      margin-bottom: 20px;
-      animation: fadeInUp 1.2s ease-out;
-    }
-    .hero .typed-text span {
-      color: #00f7ff;
-    }
-    .hero button {
-      padding: 12px 30px;
-      background: #00f7ff;
-      color: #0a0a0a;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: left 0.4s ease;
-    }
-    .hero button:hover::before {
-      left: 100%;
-    }
-    .hero button:hover {
-      background: #00d4db;
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
-    }
-    @keyframes slideIn {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes fadeInUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     section {
-      padding: 80px 0;
-      background: #1a1a1a;
-      border-bottom: 1px solid #252525;
-    }
-    section h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 40px;
-      text-align: center;
-      position: relative;
-      animation: fadeIn 1s ease-out;
-    }
-    section h2::after {
-      content: '';
-      width: 60px;
-      height: 4px;
-      background: #00f7ff;
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { width: 60px; }
-      50% { width: 100px; }
-      100% { width: 60px; }
-    }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      padding: 0 20px;
-    }
-    .card {
-      background: #252525;
-      padding: 30px;
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(0, 247, 255, 0.1) 0%, transparent 70%);
-      transition: transform 0.5s ease;
-      z-index: 0;
-    }
-    .card:hover::before {
-      transform: rotate(45deg);
-    }
-    .card:hover {
-      transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
-      box-shadow: 0 8px 20px rgba(0, 247, 255, 0.3);
-    }
-    .card h3, .card p, .card ul {
-      position: relative;
-      z-index: 1;
-    }
-    .card h3 {
-      font-size: 1.4rem;
-      color: #00f7ff;
-      margin-bottom: 15px;
-    }
-    .card p, .card ul {
-      font-size: 1rem;
-      color: #a0a0a0;
-    }
-    .card ul {
-      list-style: none;
-      margin-left: 0;
-    }
-    .card ul li {
-      margin-bottom: 8px;
-      position: relative;
-      padding-left: 20px;
-      transition: transform 0.3s ease;
-    }
-    .card ul li:hover {
-      transform: translateX(5px);
-    }
-    .card ul li::before {
-      content: '•';
-      color: #00f7ff;
-      position: absolute;
-      left: 0;
-      font-size: 1.2rem;
-    }
-    footer {
-      background: #000;
-      padding: 20px;
-      margin-left: 240px;
-      text-align: center;
-      border-top: 1px solid #00f7ff;
-    }
-    footer .footer-social a {
-      color: #a0a0a0;
-      font-size: 1.5rem;
-      transition: all 0.3s ease;
-    }
-    footer .footer-social a:hover {
-      color: #00f7ff;
-      transform: scale(1.2);
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-content {
-      background: #252525;
-      padding: 30px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 500px;
-      position: relative;
-      animation: fadeIn 0.3s ease;
-      box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .modal-content h3 {
-      font-size: 1.5rem;
-      color: #00f7ff;
-      margin-bottom: 20px;
-    }
-    .modal-content input,
-    .modal-content textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      background: #151515;
-      border: 1px solid #333;
-      color: #e0e0e0;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-    .modal-content input:focus,
-    .modal-content textarea:focus {
-      border-color: #00f7ff;
-      outline: none;
-    }
-    .modal-content textarea {
-      resize: none;
-      height: 120px;
-    }
-    .modal-content button {
-      width: 100%;
-      padding: 12px;
-      background: #00f7ff;
-      color: #0a0a0a;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .modal-content button:hover {
-      background: #00d4db;
-      box-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
-    }
-    .modal-content .close {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      color: #a0a0a0;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
-    .modal-content .close:hover {
-      color: #00f7ff;
-    }
-    .loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #0a0a0a;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 3000;
-      transition: opacity 0.5s ease;
-    }
-    .loader.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .loader::before {
-      content: '';
-      width: 50px;
-      height: 50px;
-      border: 5px solid #00f7ff;
-      border-top: 5px solid transparent;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    @media (max-width: 768px) {
-      .navbar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 20px;
-      }
-      .content, footer {
-        margin-left: 0;
-        padding: 0 20px;
-      }
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-      .hero .typed-text {
-        font-size: 1.5rem;
-      }
-      section {
-        padding: 40px 0;
-      }
-      .card:hover {
-        transform: translateY(-5px);
-      }
+      min-height: calc(100vh - 64px); /* Account for navbar height */
+      padding-top: 80px; /* Offset for fixed navbar */
     }
   </style>
 </head>
-<body>
-  <div class="loader"></div>
-  <div class="navbar">
-    <div class="logo">
-      <h1>Satya</h1>
-    </div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#internships">Internships</a>
-      <a href="#certifications">Certifications</a>
-      <a href="Satya_Resume.pdf" target="_blank">Resume</a>
-    </nav>
-    <div class="social-links">
-      <a href="https://github.com/SatyaPujith" title="GitHub"><i class="fab fa-github"></i></a>
-      <a href="https://linkedin.com/in/botukusatyapujith" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-    </div>
-  </div>
-
-  <div class="content">
-    <section class="hero" id="home">
-      <canvas id="three-canvas"></canvas>
-      <h1>Hi, I'm <span>Satya Pujith</span></h1>
-      <div class="typed-text">I’m a <span id="typed">Web Developer</span></div>
-      <button onclick="openModal()">Contact Me</button>
-    </section>
-
-    <section id="about">
-      <h2>About Me</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Career Objective</h3>
-          <p>Passionate Computer Science student specializing in Data Science, aiming to develop innovative solutions in web development and AI. Enthusiastic about scalable platforms and open-source contributions.</p>
+<body class="font-poppins bg-gray-50 text-gray-800">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md fixed w-full z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0">
+          <a href="#home" class="text-2xl font-bold text-indigo-600">BSP</a>
+        </div>
+        <div class="hidden md:flex space-x-8">
+          <a href="#home" class="text-gray-600 hover:text-indigo-600 transition">Home</a>
+          <a href="#about" class="text-gray-600 hover:text-indigo-600 transition">About</a>
+          <a href="#skills" class="text-gray-600 hover:text-indigo-600 transition">Skills</a>
+          <a href="#projects" class="text-gray-600 hover:text-indigo-600 transition">Projects</a>
+          <a href="#internships" class="text-gray-600 hover:text-indigo-600 transition">Internships</a>
+          <a href="#certifications" class="text-gray-600 hover:text-indigo-600 transition">Certifications</a>
+        </div>
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-gray-600 hover:text-indigo-600 focus:outline-none">
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
         </div>
       </div>
-    </section>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md">
+      <div class="px-4 pt-2 pb-3 space-y-1">
+        <a href="#home" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">Home</a>
+        <a href="#about" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">About</a>
+        <a href="#skills" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">Skills</a>
+        <a href="#projects" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">Projects</a>
+        <a href="#internships" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">Internships</a>
+        <a href="#certifications" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">Certifications</a>
+      </div>
+    </div>
+  </nav>
 
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Programming Languages</h3>
-          <p>Java, Python</p>
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-50 to-blue-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
+      <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 mb-4">Botuku Satya Pujith</h1>
+      <p class="text-xl text-gray-600 mb-6">Computer Science & Data Science Student | Web Developer</p>
+      <div class="flex justify-center space-x-4">
+        <a href="Satya_Resume.pdf" target="_blank" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition">View Resume</a>
+        <button onclick="openModal()" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-900 transition">Contact Me</button>
+      </div>
+      <div class="mt-6 flex justify-center space-x-4">
+        <a href="https://github.com/SatyaPujith" class="text-gray-600 hover:text-indigo-600 transition">
+          <i class="fab fa-github text-2xl"></i>
+        </a>
+        <a href="https://linkedin.com/in/botukusatyapujith" class="text-gray-600 hover:text-indigo-600 transition">
+          <i class="fab fa-linkedin-in text-2xl"></i>
+        </a>
+        <a href="https://leetcode.com/u/SatyaPujith/" class="text-gray-600 hover:text-indigo-600 transition">
+          <i class="fas fa-code text-2xl"></i>
+        </a>
+        <a href="https://www.geeksforgeeks.org/user/23951a5k85/" class="text-gray-600 hover:text-indigo-600 transition">
+          <i class="fas fa-laptop-code text-2xl"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">About Me</h2>
+      <div class="fade-in max-w-3xl mx-auto text-center">
+        <p class="text-lg text-gray-600">
+          I am a dedicated Computer Science student at the Institute of Aeronautical Engineering, specializing in Data Science. With a robust skill set in Java, Python, Laravel, React.js, and database technologies like MySQL and MongoDB, I am committed to crafting innovative solutions in web development and artificial intelligence. My projects, such as Eco Route System and Star Nova, reflect my ability to tackle real-world challenges with technical precision and creativity. As an active participant in hackathons and open-source initiatives, I strive to drive technological advancements and deliver impactful, scalable applications.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-24 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Skills</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 fade-in">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Programming Languages</h3>
+          <p class="text-gray-600">Java, Python</p>
         </div>
-        <div class="card">
-          <h3>Web Technologies</h3>
-          <p>HTML, CSS, React.js, Node.js, Laravel</p>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Web Technologies</h3>
+          <p class="text-gray-600">HTML, CSS, React.js, Node.js, Laravel</p>
         </div>
-        <div class="card">
-          <h3>Databases</h3>
-          <p>MySQL, MongoDB</p>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Databases</h3>
+          <p class="text-gray-600">MySQL, MongoDB</p>
         </div>
-        <div class="card">
-          <h3>Data Analytics</h3>
-          <p>Python (pandas, numpy, matplotlib)</p>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Data Analytics</h3>
+          <p class="text-gray-600">Python (pandas, numpy, matplotlib)</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Eco Route System</h3>
-          <p>Web platform suggesting fuel-efficient travel routes.</p>
-          <ul>
+  <!-- Projects Section -->
+  <section id="projects" class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Eco Route System</h3>
+          <p class="text-gray-600 mb-4">A web platform that suggests fuel-efficient and eco-friendly travel routes based on duration and distance.</p>
+          <ul class="text-gray-600 list-disc pl-5">
             <li>Technologies: Python, Laravel, MySQL</li>
-            <li>Features: Duration, distance, eco-friendliness</li>
-            <li>Future: Traffic-based suggestions</li>
+            <li>Features: Eco-friendly route suggestions</li>
+            <li>Future: Traffic-based route optimization</li>
           </ul>
         </div>
-        <div class="card">
-          <h3>Star Nova</h3>
-          <p>Platform connecting users with auditions based on location.</p>
-          <ul>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Star Nova</h3>
+          <p class="text-gray-600 mb-4">A platform connecting users with location-based auditions and competitions, streamlining the application process.</p>
+          <ul class="text-gray-600 list-disc pl-5">
             <li>Tools: React.js, MongoDB, Mongoose</li>
-            <li>Features: Event posting, tracking</li>
-            <li>Impact: Personalized experience</li>
+            <li>Features: Event posting, application tracking</li>
+            <li>Impact: Personalized user experience</li>
           </ul>
         </div>
-        <div class="card">
-          <h3>Fashion Fusion</h3>
-          <p>Web platform for outfit combination suggestions.</p>
-          <ul>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Fashion Fusion</h3>
+          <p class="text-gray-600 mb-4">A web platform that suggests outfit combinations based on user uploads and community feedback.</p>
+          <ul class="text-gray-600 list-disc pl-5">
             <li>Tools: React.js, Python</li>
-            <li>Features: User uploads, community feedback</li>
+            <li>Features: Outfit matching, community input</li>
           </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="internships">
-      <h2>Internships</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Python Programming (Internpe)</h3>
-          <p>Aug 2024 - Sep 2024</p>
-          <ul>
-            <li>Built a digital clock with Tkinter</li>
-            <li>Designed Tic Tac Toe</li>
-            <li>Created Snake game with Pygame</li>
-            <li>Developed Connect Four logic</li>
+  <!-- Internships Section -->
+  <section id="internships" class="py-24 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Internships</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-in">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Python Programming (Internpe)</h3>
+          <p class="text-gray-600 mb-2">Aug 2024 - Sep 2024</p>
+          <ul class="text-gray-600 list-disc pl-5">
+            <li>Built a real-time digital clock using Tkinter</li>
+            <li>Designed a dynamic Tic Tac Toe game</li>
+            <li>Created a Snake game with Pygame</li>
+            <li>Developed Connect Four game logic</li>
           </ul>
         </div>
-        <div class="card">
-          <h3>AI Creators Program (Swecha Telangana)</h3>
-          <p>Aug 2024</p>
-          <ul>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">AI Creators Program (Swecha Telangana)</h3>
+          <p class="text-gray-600 mb-2">Aug 2024</p>
+          <ul class="text-gray-600 list-disc pl-5">
             <li>Built an AI chatbot for cultural preservation</li>
             <li>Tools: React.js, Node.js</li>
           </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="certifications">
-      <h2>Certifications & Achievements</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Web Application Development</h3>
-          <p>1st Position, Infro Tech Pvt. Ltd (Mar 2025)</p>
+  <!-- Certifications Section -->
+  <section id="certifications" class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Certifications & Achievements</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Web Application Development</h3>
+          <p class="text-gray-600">1st Position, Infro Tech Pvt. Ltd (Mar 2025)</p>
         </div>
-        <div class="card">
-          <h3>TCS CodeVita Season 12</h3>
-          <p>Global Rank 1398</p>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">TCS CodeVita Season 12</h3>
+          <p class="text-gray-600">Global Rank 1398</p>
         </div>
-        <div class="card">
-          <h3>Hackathon</h3>
-          <p>3rd Position, Brainovision Pvt. Ltd (Dec 2024)</p>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Hackathon</h3>
+          <p class="text-gray-600">3rd Position, Brainovision Pvt. Ltd (Dec 2024)</p>
         </div>
-        <div class="card">
-          <h3>Python for Data Science</h3>
-          <p>NPTEL, 68% Score (Jul-Aug 2024)</p>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Python for Data Science</h3>
+          <p class="text-gray-600">NPTEL, 68% Score (Jul-Aug 2024)</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Oracle Cloud Infrastructure Generative AI</h3>
+          <p class="text-gray-600">Oracle</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Data Analytics and Visualization</h3>
+          <p class="text-gray-600">Accenture</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Google Analytics for Beginners</h3>
+          <p class="text-gray-600">Google</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Code-A-Thon</h3>
+          <p class="text-gray-600">3rd Position, Forge Alumnus Service, IIT Hyderabad</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Programming in Java</h3>
+          <p class="text-gray-600">NPTEL, 58% Score</p>
         </div>
       </div>
-    </section>
-
-    <footer>
-      <div class="footer-social">
-        <a href="https://github.com/SatyaPujith" title="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/botukusatyapujith" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-    </footer>
   </div>
+    </div>
+  </section>
 
-  <div class="modal" id="contactModal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">×</span>
-      <h3>Contact Me</h3>
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400">© 2025 Botuku Satya Pujith. All rights reserved.</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a href="https://github.com/SatyaPujith" class="text-gray-400 hover:text-indigo-400 transition">
+            <i class="fab fa-github text-xl"></i>
+          </a>
+          <a href="https://linkedin.com/in/botukusatyapujith" class="text-gray-400 hover:text-indigo-400 transition">
+            <i class="fab fa-linkedin-in text-xl"></i>
+          </a>
+          <a href="https://leetcode.com/u/SatyaPujith/" class="text-gray-400 hover:text-indigo-400 transition">
+            <i class="fas fa-code text-xl"></i>
+          </a>
+          <a href="https://www.geeksforgeeks.org/user/23951a5k85/" class="text-gray-400 hover:text-indigo-400 transition">
+            <i class="fas fa-laptop-code text-xl"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact Modal -->
+  <div class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20" id="contactModal">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full relative">
+      <span class="close absolute top-4 right-4 text-gray-600 cursor-pointer text-2xl" onclick="closeModal()">×</span>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-6">Contact Me</h3>
       <form action="https://formspree.io/f/mdkgaaej" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
+        <input type="text" name="name" placeholder="Your Name" required class="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:border-indigo-600">
+        <input type="email" name="email" placeholder="Your Email" required class="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:border-indigo-600">
+        <textarea name="message" placeholder="Your Message" required class="w-full p-3 mb-4 border rounded-lg h-32 resize-none focus:outline-none focus:border-indigo-600"></textarea>
+        <button type="submit" class="w-full bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition">Send Message</button>
       </form>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
     // Modal functionality
     function openModal() {
-      document.getElementById('contactModal').style.display = 'flex';
+      document.getElementById('contactModal').classList.remove('hidden');
     }
-
     function closeModal() {
-      document.getElementById('contactModal').style.display = 'none';
+      document.getElementById('contactModal').classList.add('hidden');
     }
 
-    // Typing animation for hero section
-    const typedText = ["Web Developer", "Data Science Enthusiast", "Computer Science Student"];
-    let index = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typedElement = document.getElementById('typed');
-
-    function type() {
-      const currentText = typedText[index];
-      if (isDeleting) {
-        typedElement.textContent = currentText.substring(0, charIndex--);
-        if (charIndex < 0) {
-          isDeleting = false;
-          index = (index + 1) % typedText.length;
+    // Fade-in animation on scroll
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
         }
-      } else {
-        typedElement.textContent = currentText.substring(0, charIndex++);
-        if (charIndex > currentText.length) {
-          isDeleting = true;
-          charIndex = currentText.length;
-          setTimeout(type, 1500);
-          return;
-        }
-      }
-      setTimeout(type, isDeleting ? 50 : 100);
-    }
-
-    // Three.js 3D Particle Background
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.position.z = 50;
-
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particleCount = 1000;
-    const posArray = new Float32Array(particleCount * 3);
-    const velocities = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount * 3; i += 3) {
-      posArray[i] = (Math.random() - 0.5) * 100;
-      posArray[i + 1] = (Math.random() - 0.5) * 100;
-      posArray[i + 2] = (Math.random() - 0.5) * 100;
-      velocities[i] = (Math.random() - 0.5) * 0.05;
-      velocities[i + 1] = (Math.random() - 0.5) * 0.05;
-      velocities[i + 2] = (Math.random() - 0.5) * 0.05;
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    const material = new THREE.PointsMaterial({
-      color: 0x00f7ff,
-      size: 0.2,
-      transparent: true,
-      opacity: 0.8,
-      blending: THREE.AdditiveBlending
-    });
-    const particles = new THREE.Points(particlesGeometry, material);
-    scene.add(particles);
-
-    function animateParticles() {
-      const positions = particlesGeometry.attributes.position.array;
-      for (let i = 0; i < particleCount * 3; i += 3) {
-        positions[i] += velocities[i];
-        positions[i + 1] += velocities[i + 1];
-        positions[i + 2] += velocities[i + 2];
-        if (Math.abs(positions[i]) > 50) velocities[i] *= -1;
-        if (Math.abs(positions[i + 1]) > 50) velocities[i + 1] *= -1;
-        if (Math.abs(positions[i + 2]) > 50) velocities[i + 2] *= -1;
-      }
-      particlesGeometry.attributes.position.needsUpdate = true;
-      particles.rotation.y += 0.001;
-      renderer.render(scene, camera);
-      requestAnimationFrame(animateParticles);
-    }
-
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // Loader animation
-    document.addEventListener('DOMContentLoaded', () => {
-      type();
-      animateParticles();
-      setTimeout(() => {
-        document.querySelector('.loader').classList.add('hidden');
-      }, 2000);
-    });
+      });
+    }, { threshold: 0.1 });
+    fadeElements.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
