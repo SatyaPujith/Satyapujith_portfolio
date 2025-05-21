@@ -4,12 +4,111 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Botuku Satya Pujith - Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      overflow-x: hidden;
       scroll-behavior: smooth;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(18, 18, 18, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+    .navbar .nav-links a {
+      transition: color 0.3s ease;
+    }
+    .navbar .nav-links a:hover {
+      color: #f5f5f5;
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      transition: filter 0.5s ease;
+    }
+    .hero-image:hover {
+      filter: grayscale(0%);
+    }
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards 0.5s;
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      color: #b0b0b0;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeIn 1s forwards 1s;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s forwards 1.5s;
+    }
+    .btn-primary {
+      background-color: #ffffff;
+      color: #121212;
+      padding: 0.75rem 2rem;
+      font-weight: 500;
+      border-radius: 0.25rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #e0e0e0;
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #ffffff;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .btn-secondary:hover {
+      color: #e0e0e0;
+      transform: translateY(-2px);
+    }
+    section {
+      padding: 5rem 0;
+      min-height: 100vh;
+      display: none;
+    }
+    section.active {
+      display: block;
+    }
+    #home {
+      display: flex;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
     }
     .fade-in {
       opacity: 0;
@@ -20,80 +119,214 @@
       opacity: 1;
       transform: translateY(0);
     }
-    section {
-      min-height: calc(100vh - 64px); /* Account for navbar height */
-      padding-top: 80px; /* Offset for fixed navbar */
+    .card {
+      background-color: #1a1a1a;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .project-btn {
+      background-color: #ffffff;
+      color: #121212;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .project-btn:hover {
+      background-color: #e0e0e0;
+      transform: translateY(-2px);
+    }
+    .social-links a {
+      transition: color 0.3s ease;
+    }
+    .social-links a:hover {
+      color: #e0e0e0;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background-color: #1a1a1a;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      position: relative;
+      max-width: 500px;
+      width: 90%;
+    }
+    .modal-content input, .modal-content textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #333;
+      border-radius: 0.25rem;
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Roboto', sans-serif;
+    }
+    .modal-content textarea {
+      height: 120px;
+      resize: none;
+    }
+    .modal-content button {
+      width: 100%;
+      background-color: #ffffff;
+      color: #121212;
+      padding: 0.75rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    .modal-content button:hover {
+      background-color: #e0e0e0;
+    }
+    .close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .mobile-menu {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-image-container, .hero-text {
+        width: 100%;
+      }
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .mobile-menu {
+        display: block;
+      }
+      .mobile-menu-content {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100%;
+        background-color: #1a1a1a;
+        padding: 2rem;
+        transition: right 0.3s ease;
+      }
+      .mobile-menu-content.active {
+        right: 0;
+      }
+      .grid {
+        grid-template-columns: 1fr !important;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+      .hero-text p {
+        font-size: 0.9rem;
+      }
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
-<body class="font-poppins bg-gray-50 text-gray-800">
+<body>
   <!-- Navbar -->
-  <nav class="bg-white shadow-md fixed w-full z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex-shrink-0">
-          <a href="#home" class="text-2xl font-bold text-indigo-600">BSP</a>
-        </div>
-        <div class="hidden md:flex space-x-8">
-          <a href="#home" class="text-gray-600 hover:text-indigo-600 transition">Home</a>
-          <a href="#about" class="text-gray-600 hover:text-indigo-600 transition">About</a>
-          <a href="#skills" class="text-gray-600 hover:text-indigo-600 transition">Skills</a>
-          <a href="#projects" class="text-gray-600 hover:text-indigo-600 transition">Projects</a>
-          <a href="#internships" class="text-gray-600 hover:text-indigo-600 transition">Internships</a>
-          <a href="#certifications" class="text-gray-600 hover:text-indigo-600 transition">Certifications</a>
-        </div>
-        <div class="md:hidden">
-          <button id="menu-toggle" class="text-gray-600 hover:text-indigo-600 focus:outline-none">
-            <i class="fas fa-bars text-2xl"></i>
-          </button>
-        </div>
+  <nav class="navbar">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-lg font-semibold">
+        <a href="#home" onclick="showSection('home')">Botuku Satya Pujith</a>
       </div>
-    </div>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md">
-      <div class="px-4 pt-2 pb-3 space-y-1">
-        <a href="#home" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">Home</a>
-        <a href="#about" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">About</a>
-        <a href="#skills" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">Skills</a>
-        <a href="#projects" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">Projects</a>
-        <a href="#internships" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">Internships</a>
-        <a href="#certifications" class="block text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md">Certifications</a>
+      <div class="nav-links flex space-x-6">
+        <a href="#home" onclick="showSection('home')" class="text-gray-400 hover:text-white">Home</a>
+        <a href="#about" onclick="showSection('about')" class="text-gray-400 hover:text-white">About</a>
+        <a href="#skills" onclick="showSection('skills')" class="text-gray-400 hover:text-white">Skills</a>
+        <a href="#projects" onclick="showSection('projects')" class="text-gray-400 hover:text-white">Projects</a>
+        <a href="#internships" onclick="showSection('internships')" class="text-gray-400 hover:text-white">Internships</a>
+        <a href="#certifications" onclick="showSection('certifications')" class="text-gray-400 hover:text-white">Certifications</a>
+        <a href="#contact" onclick="showSection('contact')" class="text-gray-400 hover:text-white">Contact</a>
+      </div>
+      <div class="mobile-menu md:hidden">
+        <button id="menu-toggle" class="text-white">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+        <div id="mobile-menu-content" class="mobile-menu-content">
+          <button id="menu-close" class="text-white mb-6">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+          <div class="flex flex-col space-y-4">
+            <a href="#home" onclick="showSection('home')" class="text-gray-400 hover:text-white">Home</a>
+            <a href="#about" onclick="showSection('about')" class="text-gray-400 hover:text-white">About</a>
+            <a href="#skills" onclick="showSection('skills')" class="text-gray-400 hover:text-white">Skills</a>
+            <a href="#projects" onclick="showSection('projects')" class="text-gray-400 hover:text-white">Projects</a>
+            <a href="#internships" onclick="showSection('internships')" class="text-gray-400 hover:text-white">Internships</a>
+            <a href="#certifications" onclick="showSection('certifications')" class="text-gray-400 hover:text-white">Certifications</a>
+            <a href="#contact" onclick="showSection('contact')" class="text-gray-400 hover:text-white">Contact</a>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-50 to-blue-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
-      <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 mb-4">Botuku Satya Pujith</h1>
-      <p class="text-xl text-gray-600 mb-6">Computer Science & Data Science Student | Web Developer</p>
-      <div class="flex justify-center space-x-4">
-        <a href="Satya_Resume.pdf" target="_blank" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition">View Resume</a>
-        <button onclick="openModal()" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-900 transition">Contact Me</button>
+  <section id="home" class="hero">
+    <div class="flex flex-col md:flex-row w-full h-full">
+      <div class="hero-image-container md:w-1/2">
+        <!-- Placeholder image; replace with your image later -->
+        <img src="https://via.placeholder.com/600x800?text=Your+Image+Here" alt="Botuku Satya Pujith" class="hero-image">
       </div>
-      <div class="mt-6 flex justify-center space-x-4">
-        <a href="https://github.com/SatyaPujith" class="text-gray-600 hover:text-indigo-600 transition">
-          <i class="fab fa-github text-2xl"></i>
-        </a>
-        <a href="https://linkedin.com/in/botukusatyapujith" class="text-gray-600 hover:text-indigo-600 transition">
-          <i class="fab fa-linkedin-in text-2xl"></i>
-        </a>
-        <a href="https://leetcode.com/u/SatyaPujith/" class="text-gray-600 hover:text-indigo-600 transition">
-          <i class="fas fa-code text-2xl"></i>
-        </a>
-        <a href="https://www.geeksforgeeks.org/user/23951a5k85/" class="text-gray-600 hover:text-indigo-600 transition">
-          <i class="fas fa-laptop-code text-2xl"></i>
-        </a>
+      <div class="hero-text md:w-1/2 flex flex-col justify-center p-8 md:p-16">
+        <h1>MY PORTFOLIO</h1>
+        <p>
+          I am a dedicated Computer Science student specializing in Data Science, with expertise in Java, Python, Laravel, React.js, and databases like MySQL and MongoDB. Explore my projects and skills below.
+        </p>
+        <div class="hero-buttons">
+          <a href="Satya_Resume.pdf" target="_blank" class="btn-primary">View Resume</a>
+          <button onclick="playVideoTour()" class="btn-secondary">
+            <i class="fas fa-play"></i> Play Video
+          </button>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-24 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">About Me</h2>
-      <div class="fade-in max-w-3xl mx-auto text-center">
-        <p class="text-lg text-gray-600">
+  <section id="about" class="py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2>About Me</h2>
+      <div class="fade-in text-center text-gray-400">
+        <p>
           I am a dedicated Computer Science student at the Institute of Aeronautical Engineering, specializing in Data Science. With a robust skill set in Java, Python, Laravel, React.js, and database technologies like MySQL and MongoDB, I am committed to crafting innovative solutions in web development and artificial intelligence. My projects, such as Eco Route System and Star Nova, reflect my ability to tackle real-world challenges with technical precision and creativity. As an active participant in hackathons and open-source initiatives, I strive to drive technological advancements and deliver impactful, scalable applications.
         </p>
       </div>
@@ -101,84 +334,87 @@
   </section>
 
   <!-- Skills Section -->
-  <section id="skills" class="py-24 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Skills</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 fade-in">
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Programming Languages</h3>
-          <p class="text-gray-600">Java, Python</p>
+  <section id="skills" class="py-16 bg-[#1a1a1a]">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2>Skills</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 fade-in">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Programming Languages</h3>
+          <p class="text-gray-400">Java, Python</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Web Technologies</h3>
-          <p class="text-gray-600">HTML, CSS, React.js, Node.js, Laravel</p>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Web Technologies</h3>
+          <p class="text-gray-400">HTML, CSS, React.js, Node.js, Laravel</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Databases</h3>
-          <p class="text-gray-600">MySQL, MongoDB</p>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Databases</h3>
+          <p class="text-gray-400">MySQL, MongoDB</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Data Analytics</h3>
-          <p class="text-gray-600">Python (pandas, numpy, matplotlib)</p>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Data Analytics</h3>
+          <p class="text-gray-400">Python (pandas, numpy, matplotlib)</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="py-24 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Eco Route System</h3>
-          <p class="text-gray-600 mb-4">A web platform that suggests fuel-efficient and eco-friendly travel routes based on duration and distance.</p>
-          <ul class="text-gray-600 list-disc pl-5">
+  <section id="projects" class="py-16">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2>Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Eco Route System</h3>
+          <p class="text-gray-400 mb-4">A web platform that suggests fuel-efficient and eco-friendly travel routes based on duration and distance.</p>
+          <ul class="text-gray-400 list-disc pl-5 mb-4">
             <li>Technologies: Python, Laravel, MySQL</li>
             <li>Features: Eco-friendly route suggestions</li>
             <li>Future: Traffic-based route optimization</li>
           </ul>
+          <a href="https://github.com/SatyaPujith/Eco-Route-System" target="_blank" class="project-btn">View Project</a>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Star Nova</h3>
-          <p class="text-gray-600 mb-4">A platform connecting users with location-based auditions and competitions, streamlining the application process.</p>
-          <ul class="text-gray-600 list-disc pl-5">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Star Nova</h3>
+          <p class="text-gray-400 mb-4">A platform connecting users with location-based auditions and competitions, streamlining the application process.</p>
+          <ul class="text-gray-400 list-disc pl-5 mb-4">
             <li>Tools: React.js, MongoDB, Mongoose</li>
             <li>Features: Event posting, application tracking</li>
             <li>Impact: Personalized user experience</li>
           </ul>
+          <a href="https://github.com/SatyaPujith/Star-Nova" target="_blank" class="project-btn">View Project</a>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Fashion Fusion</h3>
-          <p class="text-gray-600 mb-4">A web platform that suggests outfit combinations based on user uploads and community feedback.</p>
-          <ul class="text-gray-600 list-disc pl-5">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Fashion Fusion</h3>
+          <p class="text-gray-400 mb-4">A web platform that suggests outfit combinations based on user uploads and community feedback.</p>
+          <ul class="text-gray-400 list-disc pl-5 mb-4">
             <li>Tools: React.js, Python</li>
             <li>Features: Outfit matching, community input</li>
           </ul>
+          <a href="https://github.com/SatyaPujith/Fashion-Fusion" target="_blank" class="project-btn">View Project</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Internships Section -->
-  <section id="internships" class="py-24 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Internships</h2>
+  <section id="internships" class="py-16 bg-[#1a1a1a]">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2>Internships</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-in">
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Python Programming (Internpe)</h3>
-          <p class="text-gray-600 mb-2">Aug 2024 - Sep 2024</p>
-          <ul class="text-gray-600 list-disc pl-5">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Python Programming (Internpe)</h3>
+          <p class="text-gray-400 mb-2">Aug 2024 - Sep 2024</p>
+          <ul class="text-gray-400 list-disc pl-5">
             <li>Built a real-time digital clock using Tkinter</li>
             <li>Designed a dynamic Tic Tac Toe game</li>
             <li>Created a Snake game with Pygame</li>
             <li>Developed Connect Four game logic</li>
           </ul>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">AI Creators Program (Swecha Telangana)</h3>
-          <p class="text-gray-600 mb-2">Aug 2024</p>
-          <ul class="text-gray-600 list-disc pl-5">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">AI Creators Program (Swecha Telangana)</h3>
+          <p class="text-gray-400 mb-2">Aug 2024</p>
+          <ul class="text-gray-400 list-disc pl-5">
             <li>Built an AI chatbot for cultural preservation</li>
             <li>Tools: React.js, Node.js</li>
           </ul>
@@ -188,84 +424,89 @@
   </section>
 
   <!-- Certifications Section -->
-  <section id="certifications" class="py-24 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Certifications & Achievements</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Web Application Development</h3>
-          <p class="text-gray-600">1st Position, Infro Tech Pvt. Ltd (Mar 2025)</p>
+  <section id="certifications" class="py-16">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2>Certifications & Achievements</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Web Application Development</h3>
+          <p class="text-gray-400">1st Position, Infro Tech Pvt. Ltd (Mar 2025)</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">TCS CodeVita Season 12</h3>
-          <p class="text-gray-600">Global Rank 1398</p>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">TCS CodeVita Season 12</h3>
+          <p class="text-gray-400">Global Rank 1398</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Hackathon</h3>
-          <p class="text-gray-600">3rd Position, Brainovision Pvt. Ltd (Dec 2024)</p>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Hackathon</h3>
+          <p class="text-gray-400">3rd Position, Brainovision Pvt. Ltd (Dec 2024)</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Python for Data Science</h3>
-          <p class="text-gray-600">NPTEL, 68% Score (Jul-Aug 2024)</p>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Python for Data Science</h3>
+          <p class="text-gray-400">NPTEL, 68% Score (Jul-Aug 2024)</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Oracle Cloud Infrastructure Generative AI</h3>
-          <p class="text-gray-600">Oracle</p>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Oracle Cloud Infrastructure Generative AI</h3>
+          <p class="text-gray-400">Oracle</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Data Analytics and Visualization</h3>
-          <p class="text-gray-600">Accenture</p>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Data Analytics and Visualization</h3>
+          <p class="text-gray-400">Accenture</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Google Analytics for Beginners</h3>
-          <p class="text-gray-600">Google</p>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Google Analytics for Beginners</h3>
+          <p class="text-gray-400">Google</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Code-A-Thon</h3>
-          <p class="text-gray-600">3rd Position, Forge Alumnus Service, IIT Hyderabad</p>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Code-A-Thon</h3>
+          <p class="text-gray-400">3rd Position, Forge Alumnus Service, IIT Hyderabad</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Programming in Java</h3>
-          <p class="text-gray-600">NPTEL, 58% Score</p>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-white mb-2">Programming in Java</h3>
+          <p class="text-gray-400">NPTEL, 58% Score</p>
         </div>
       </div>
-  </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-[#1a1a1a]">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <h2>Contact Me</h2>
+      <div class="fade-in">
+        <button onclick="openModal()" class="btn-primary mb-6">Get in Touch</button>
+        <div class="social-links flex justify-center space-x-6">
+          <a href="https://github.com/SatyaPujith" class="text-gray-400 hover:text-white">
+            <i class="fab fa-github text-2xl"></i>
+          </a>
+          <a href="https://linkedin.com/in/botukusatyapujith" class="text-gray-400 hover:text-white">
+            <i class="fab fa-linkedin-in text-2xl"></i>
+          </a>
+          <a href="https://leetcode.com/u/SatyaPujith/" class="text-gray-400 hover:text-white">
+            <i class="fas fa-code text-2xl"></i>
+          </a>
+          <a href="https://www.geeksforgeeks.org/user/23951a5k85/" class="text-gray-400 hover:text-white">
+            <i class="fas fa-laptop-code text-2xl"></i>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <p class="text-gray-400">© 2025 Botuku Satya Pujith. All rights reserved.</p>
-        <div class="flex space-x-6 mt-4 md:mt-0">
-          <a href="https://github.com/SatyaPujith" class="text-gray-400 hover:text-indigo-400 transition">
-            <i class="fab fa-github text-xl"></i>
-          </a>
-          <a href="https://linkedin.com/in/botukusatyapujith" class="text-gray-400 hover:text-indigo-400 transition">
-            <i class="fab fa-linkedin-in text-xl"></i>
-          </a>
-          <a href="https://leetcode.com/u/SatyaPujith/" class="text-gray-400 hover:text-indigo-400 transition">
-            <i class="fas fa-code text-xl"></i>
-          </a>
-          <a href="https://www.geeksforgeeks.org/user/23951a5k85/" class="text-gray-400 hover:text-indigo-400 transition">
-            <i class="fas fa-laptop-code text-xl"></i>
-          </a>
-        </div>
-      </div>
-    </div>
+  <footer class="bg-[#1a1a1a] py-8 text-center text-gray-400">
+    <p>© 2025 Botuku Satya Pujith. All rights reserved.</p>
   </footer>
 
   <!-- Contact Modal -->
-  <div class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20" id="contactModal">
-    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full relative">
-      <span class="close absolute top-4 right-4 text-gray-600 cursor-pointer text-2xl" onclick="closeModal()">×</span>
-      <h3 class="text-2xl font-semibold text-gray-800 mb-6">Contact Me</h3>
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">×</span>
+      <h3 class="text-xl font-semibold mb-4">Contact Me</h3>
       <form action="https://formspree.io/f/mdkgaaej" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required class="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:border-indigo-600">
-        <input type="email" name="email" placeholder="Your Email" required class="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:border-indigo-600">
-        <textarea name="message" placeholder="Your Message" required class="w-full p-3 mb-4 border rounded-lg h-32 resize-none focus:outline-none focus:border-indigo-600"></textarea>
-        <button type="submit" class="w-full bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition">Send Message</button>
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
       </form>
     </div>
   </div>
@@ -273,17 +514,58 @@
   <script>
     // Mobile menu toggle
     const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenuContent = document.getElementById('mobile-menu-content');
+
     menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+      mobileMenuContent.classList.add('active');
+    });
+
+    menuClose.addEventListener('click', () => {
+      mobileMenuContent.classList.remove('active');
     });
 
     // Modal functionality
     function openModal() {
-      document.getElementById('contactModal').classList.remove('hidden');
+      document.getElementById('contactModal').style.display = 'flex';
     }
+
     function closeModal() {
-      document.getElementById('contactModal').classList.add('hidden');
+      document.getElementById('contactModal').style.display = 'none';
+    }
+
+    // Show only the selected section
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        if (section.id === sectionId) {
+          section.classList.add('active');
+        } else {
+          section.classList.remove('active');
+        }
+      });
+
+      // Close mobile menu if open
+      mobileMenuContent.classList.remove('active');
+
+      // Scroll to the section
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Play video tour: scroll through sections one by one
+    function playVideoTour() {
+      const sectionIds = ['about', 'skills', 'projects', 'internships', 'certifications', 'contact'];
+      let index = 0;
+
+      function scrollToNextSection() {
+        if (index < sectionIds.length) {
+          showSection(sectionIds[index]);
+          index++;
+          setTimeout(scrollToNextSection, 3000); // Pause for 3 seconds at each section
+        }
+      }
+
+      scrollToNextSection();
     }
 
     // Fade-in animation on scroll
@@ -295,7 +577,11 @@
         }
       });
     }, { threshold: 0.1 });
+
     fadeElements.forEach(el => observer.observe(el));
+
+    // Show home section by default
+    showSection('home');
   </script>
 </body>
 </html>
